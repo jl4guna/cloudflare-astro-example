@@ -6,9 +6,7 @@ const { env } = Astro.locals.runtime;
 
 const DB = env.EXAMPLE_DB;
 
-const products = await DB.prepare('SELECT * FROM products').all();
-
-console.log(products);
+const { success, results } = await DB.prepare('SELECT * FROM products').all();
 ---
 
 <Layout title='Welcome to Astro.'>
@@ -69,6 +67,8 @@ console.log(products);
         body='Come say hi to our amazing Discord community. ❤️'
       />
     </ul>
+
+    {success && results.map((product) => <p>{product.name}</p>)}
   </main>
 </Layout>
 
