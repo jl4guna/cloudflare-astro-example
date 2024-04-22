@@ -1,12 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import { GET } from './services/bucket';
 
 const { env } = Astro.locals.runtime;
 
 const DB = env.EXAMPLE_DB;
 
 const { success, results } = await DB.prepare('SELECT * FROM products').all();
+
+const flan = await (await GET(Astro, '00003-2740895647.png')).json();
+
+console.log({ flan });
 ---
 
 <Layout title='Welcome to Astro.'>
